@@ -22,6 +22,11 @@ import { favorite } from "../../../store/actions/favoriteAction";
 export default function MovieDetails({ movie }) {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.favorite);
+  const { loginIsOk } = useSelector((state) => state.login);
+
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
 
   useEffect(() => {
     dispatch(favorite(movie.id, movie.poster_path, movie.title));
@@ -38,17 +43,21 @@ export default function MovieDetails({ movie }) {
           <Title>{movie.original_title}</Title>
           <Ratings>{movie.vote_average}</Ratings>
         </Div>
-        <FavoriteDiv>
-          {loading ? (
-            <Loading fav={loading}></Loading>
-          ) : (
-            <Button
-              movieId={movie.id}
-              img={movie.poster_path}
-              title={movie.original_title}
-            ></Button>
-          )}
-        </FavoriteDiv>
+        {loginIsOk ? (
+          <FavoriteDiv>
+            {loading ? (
+              <Loading fav={loading}></Loading>
+            ) : (
+              <Button
+                movieId={movie.id}
+                img={movie.poster_path}
+                title={movie.original_title}
+              ></Button>
+            )}
+          </FavoriteDiv>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
         <Description>{movie.overview}</Description>
 
         <Genre>

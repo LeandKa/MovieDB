@@ -24,7 +24,6 @@ export default function MovieDetails() {
         SetMovie(result.data);
         setLoading(false);
     });
-    console.log(movieId)
   }, [movieId]);
 
 

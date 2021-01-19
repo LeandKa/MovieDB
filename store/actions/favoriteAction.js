@@ -12,7 +12,7 @@ export const GetFavorite = () => async (dispatch) => {
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         if (doc.data().movie.length > 0) {
-          return dispatch({
+        return dispatch({
             type: types.GET_FAVORITE,
             payload: doc.data().movie,
           });
@@ -81,9 +81,9 @@ export const favorite = (id, img, title) => async (dispatch) => {
   });
   dispatch({ type: types.FETCH_LOADING });
   query.get().then((snapshot) => {
-    console.log(snapshot.docs.length);
+    console.log(snapshot.docs);
     if (snapshot.docs.length > 0) {
-      dispatch({
+    return  dispatch({
         type: types.SHOW_FAVORITE,
         payload: true,
       });
