@@ -20,17 +20,11 @@ export default function MovieDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      Api.get(`${movieId}`).then((result) => {
+    Api.get(`${movieId}`).then((result) => {
         SetMovie(result.data);
         setLoading(false);
     });
-  }, []);
-
-
-  useEffect(() => {
-    Api.get(`${movieId}`).then((result) => {
-        SetMovie(result.data);
-    });
+    console.log(movieId)
   }, [movieId]);
 
 
